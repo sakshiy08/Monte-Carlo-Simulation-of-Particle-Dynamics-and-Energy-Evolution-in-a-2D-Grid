@@ -23,7 +23,7 @@ The `energy` function takes two parameters, `x` and `y`, which represent the cha
 
 + initial_energy(A) function computes the total initial energy of the system <br>
 + It initializes old_energy to zero and first_energy as a matrix of zeros to store interaction energies <br>
-Iterates through each element of matrix A to calculate interaction energies:
++ Iterates through each element of matrix A to calculate interaction energies:
 Handles boundary conditions to ensure proper energy calculation at matrix edges
 Accumulates total energy in old_energy 
-The computed old_energy is printed, representing the total initial energy of the particle system based on initial particle configurations.
++ The computed old_energy is printed, representing the total initial energy of the particle system based on initial particle configurations.
