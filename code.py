@@ -1,23 +1,58 @@
 import numpy as np
 import random
 
-A = np.zeros((30,30))+2        #creating a matrix
-count=0
-for i in range(1000):
-  x=random.randint(0,29)
-  y=random.randint(0,29)
-  if(A[x][y]==2 and count<100):
-    A[x][y]= 0
-    count+=1
-  elif(A[x][y]==2 and count>=100 and count<250):
-    A[x][y]= -1
-    count+=1
-  elif(A[x][y]==2 and count>=250 and count <400):
-    A[x][y]= +1
-    count+=1
-  elif(count==400):
-    break
-#print(A)
+def create_matrix(matrix_size, num_neutral, num_negative, num_positive):
+    """
+    Creates a matrix of given size and populates it with neutral, negative, and positive particles.
+    
+    Parameters:
+    matrix_size (int): The size of the matrix (n x n).
+    num_neutral (int): The number of neutral particles (0).
+    num_negative (int): The number of negatively charged particles (-1).
+    num_positive (int): The number of positively charged particles (1).
+    
+    Returns:
+    numpy.ndarray: The populated matrix.
+    """
+    # Initialize the matrix with all elements set to 2
+    A = np.zeros((matrix_size, matrix_size)) + 2  
+    count = 0  # Counter to track the number of particles placed
+    
+    # Loop to place the particles
+    for i in range(1000 * matrix_size):  # Increased iteration limit to account for larger matrices
+        x = random.randint(0, matrix_size - 1)
+        y = random.randint(0, matrix_size - 1)
+        
+        # Place neutral particles
+        if A[x][y] == 2 and count < num_neutral:
+            A[x][y] = 0
+            count += 1
+        # Place negatively charged particles
+        elif A[x][y] == 2 and count >= num_neutral and count < num_neutral + num_negative:
+            A[x][y] = -1
+            count += 1
+        # Place positively charged particles
+        elif A[x][y] == 2 and count >= num_neutral + num_negative and count < num_neutral + num_negative + num_positive:
+            A[x][y] = 1
+            count += 1
+        # Stop if the required number of particles has been placed
+        elif count == num_neutral + num_negative + num_positive:
+            break
+    
+    return A
+
+# Example usage
+matrix_size = 30  # You can change this to any size
+num_neutral = 100
+num_negative = 150
+num_positive = 150
+
+# Create the matrix with the specified parameters
+A = create_matrix(matrix_size, num_neutral, num_negative, num_positive)
+
+# Print the matrix to verify
+print(A)
+
 
 -----------------------------------------------------------------------------------------
 
