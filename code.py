@@ -2,18 +2,6 @@ import numpy as np
 import random
 
 def create_matrix(matrix_size, num_neutral, num_negative, num_positive):
-    """
-    Creates a matrix of given size and populates it with neutral, negative, and positive particles.
-    
-    Parameters:
-    matrix_size (int): The size of the matrix (n x n).
-    num_neutral (int): The number of neutral particles (0).
-    num_negative (int): The number of negatively charged particles (-1).
-    num_positive (int): The number of positively charged particles (1).
-    
-    Returns:
-    numpy.ndarray: The populated matrix.
-    """
     # Initialize the matrix with all elements set to 2
     A = np.zeros((matrix_size, matrix_size)) + 2  
     count = 0  # Counter to track the number of particles placed
@@ -41,38 +29,26 @@ def create_matrix(matrix_size, num_neutral, num_negative, num_positive):
     
     return A
 
-# Example usage
-matrix_size = 30  # You can change this to any size
-num_neutral = 100
-num_negative = 150
-num_positive = 150
-
-# Create the matrix with the specified parameters
-A = create_matrix(matrix_size, num_neutral, num_negative, num_positive)
-
-# Print the matrix to verify
-print(A)
-
-
 -----------------------------------------------------------------------------------------
 
-#defining values of energy of interation
-def energy(x,y):
-  if x==0 and y==-1:
-    e = -0.1
-  elif x==0 and y==1:
-    e = 0.1
-  elif x==0 and y==0:
-    e = 0.1
-  elif x==1 and y==1:
-    e = 0.5
-  elif x==-1 and y==-1:
-    e = 0.5
-  elif x==1 and y==-1:
-    e = -0.7
-  else:
-    e=0
-  return e
+def energy(x, y):
+    # Define energy values based on particle interactions
+    if x == 0 and y == -1:
+        e = -0.1
+    elif x == 0 and y == 1:
+        e = 0.1
+    elif x == 0 and y == 0:
+        e = 0.1
+    elif x == 1 and y == 1:
+        e = 0.5
+    elif x == -1 and y == -1:
+        e = 0.5
+    elif x == 1 and y == -1:
+        e = -0.7
+    else:
+        e = 0  # Default energy value for non-defined interactions
+    
+    return e
 
 ------------------------------------------------------------------------------------------
 
