@@ -52,24 +52,27 @@ def energy(x, y):
 
 ------------------------------------------------------------------------------------------
 
-#Initial energy of the system
-old_energy = 0
-first_energy = np.zeros((30,30))
-for i in range(30):
-  for j in range(30):
-    if(i==29 and j!=29):
-      first_energy[i][j] = energy(A[i][j],A[i][j+1])
-    elif(i!=29 and j==29):
-      first_energy[i][j] = energy(A[i][j],A[i+1][j])
-    elif(i==29 and j==29):
-      continue
-    else:
-      first_energy[i][j] += energy(A[i][j],A[i+1][j])
-      first_energy[i][j] += energy(A[i][j],A[i][j+1])
-    #print((i,j+1),(i+1,j))
-  #print(first_energy)
-    old_energy=old_energy + first_energy[i][j]
-print(old_energy)
+n, m = A.shape  # Get the dimensions of the matrix
+old_energy = 0  # Initialize the total energy
+    first_energy = np.zeros((n, m))  # Matrix to store interaction energies
+
+    # Iterate over each element in the matrix
+    for i in range(n):
+        for j in range(m):
+            if i == n - 1 and j != m - 1:  # If on the last row but not the last column
+                first_energy[i][j] = energy(A[i][j], A[i][j + 1])
+            elif i != n - 1 and j == m - 1:  # If not on the last row but on the last column
+                first_energy[i][j] = energy(A[i][j], A[i + 1][j])
+            elif i == n - 1 and j == m - 1:  # If on the last row and last column
+                continue
+            else:
+                first_energy[i][j] += energy(A[i][j], A[i + 1][j])
+                first_energy[i][j] += energy(A[i][j], A[i][j + 1])
+
+            old_energy += first_energy[i][j]  # Sum the energies
+
+    print(old_energy)  # Print the total initial energy
+
 
 -------------------------------------------------------------------------------------------
 
