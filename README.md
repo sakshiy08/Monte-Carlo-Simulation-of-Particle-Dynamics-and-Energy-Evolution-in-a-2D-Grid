@@ -32,20 +32,20 @@ The `energy` function takes two parameters, `x` and `y`, which represent the cha
 This part of the code uses the Metropolis Monte Carlo method to simulate the movement of particles within the matrix. The key aspects of this process are:
 
 1. **Random Selection of Particles:** 
-    - The code randomly selects a particle within the matrix to move. Particles can be neutral (0), negatively charged (-1), or positively charged (1).
+     The code randomly selects a particle within the matrix to move. Particles can be neutral (0), negatively charged (-1), or positively charged (1).
 
 2. **Movement Direction:** 
-    - A random direction is chosen for the particle to move (left, right, up, or down). This is determined by generating a random number and using it to select one of the four possible directions.
+     A random direction is chosen for the particle to move (left, right, up, or down). This is determined by generating a random number and using it to select one of the four possible directions.
 
 3. **Periodic Boundary Conditions:** 
-    - The code applies periodic boundary conditions to ensure particles that move out of one side of the matrix re-enter from the opposite side. This simulates a continuous, unbounded space.
+     The code applies periodic boundary conditions to ensure particles that move out of one side of the matrix re-enter from the opposite side. This simulates a continuous, unbounded space.
 
 4. **Swapping Positions:** 
-    - If the selected direction leads to an empty position (value 2), the particle is moved to the new position, and the old position is marked as empty.
+     If the selected direction leads to an empty position (value 2), the particle is moved to the new position, and the old position is marked as empty.
 
 5. **Iteration:** 
-    - The process is repeated for a defined number of steps, allowing particles to move multiple times and achieve a more realistic simulation of dynamic movement.
+     The process is repeated for a defined number of steps, allowing particles to move multiple times and achieve a more realistic simulation of dynamic movement.
 
-**KT Value:** The KT value (related to thermal energy) can be adjusted to influence the likelihood of particle movement.
+**KT Value:** The KT value (related to thermal energy) can be adjusted to influence the likelihood of particle movement
 
-This method helps in studying the statistical behavior and equilibrium properties of the system by simulating the movement and interaction of particles under controlled conditions.
+This method helps in studying the statistical behavior and equilibrium properties of the system by simulating the movement and interaction of particles under controlled conditions
