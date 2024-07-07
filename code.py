@@ -76,57 +76,47 @@ old_energy = 0  # Initialize the total energy
 
 -------------------------------------------------------------------------------------------
 
-import random
 import math
-KT=0.6
-for i in range(1000):
-  A1=A.copy()
-  x=random.randint(0,29)
-  y=random.randint(0,29)
-  if A[x][y]==0 or A[x][y]==1 or A[x][y]==-1:
-    r=random.random()
-    if(r<=0.25):
-      x1=x-1
-      y1=y
-      if(x1<0):
-    #adding Periodic Boundary Condition
-        x1=x1+30
-      if(A[x1][y1]==2):
-        A[x1][y1]=A[x][y]
-        A[x][y]=2
-        x=x1
-        y=y1
-    if(r>0.25 and r<=0.5):
-      x1=x+1
-      y1=y
-      if(x1>29):
-        x1=x1-30
-        if(A[x1][y1]==2):
-          A[x1][y1]=A[x][y]
-          A[x][y]=2
-          x=x1
-          y=y1
-    if(r>0.5 and r<=0.75):
-      x1=x
-      y1=y-1
-      if(y1<0):
-        y1=y1+30
-      if(A[x1][y1]==2):
-        A[x1][y1]=A[x][y]
-        A[x][y]=2
-        x=x1
-        y=y1
-    if(r>0.75):
-      x1=x
-      y1=y+1
-      if(y1>29):
-        y1=y1-30
-      if(A[x1][y1]==2):
-        A[x1][y1]=A[x][y]
-        A[x][y]=2
-        x=x1
-        y=y1
-#print(A)
+
+def metropolis_monte_carlo(matrix, KT, steps):
+    n, m = matrix.shape  # Get the dimensions of the matrix
+    for _ in range(steps):
+        matrix_copy = matrix.copy()  # Create a copy of the matrix
+        x = random.randint(0, n - 1)  # Randomly select a row
+        y = random.randint(0, m - 1)  # Randomly select a column
+        if matrix[x][y] == 0 or matrix[x][y] == 1 or matrix[x][y] == -1:  # Check if the selected position has a movable particle
+            r = random.random()  # Generate a random number for movement direction
+            if r <= 0.25:  # Move left
+                x1 = x - 1
+                y1 = y
+                if x1 < 0:
+                    # Apply Periodic Boundary Condition
+                    x1 = x1 + n
+            elif r > 0.25 and r <= 0.5:  # Move right
+                x1 = x + 1
+                y1 = y
+                if x1 >= n:
+                    x1 = x1 - n
+            elif r > 0.5 and r <= 0.75:  # Move up
+                x1 = x
+                y1 = y - 1
+                if y1 < 0:
+                    y1 = y1 + m
+            elif r > 0.75:  # Move down
+                x1 = x
+                y1 = y + 1
+                if y1 >= m:
+                    y1 = y1 - m
+
+            # Swap positions if the target position is empty (value is 2)
+            if matrix[x1][y1] == 2:
+                matrix[x1][y1] = matrix[x][y]
+                matrix[x][y] = 2
+                x = x1
+                y = y1
+
+    return matrix
+
 
 ------------------------------------------------------------------------------------
 
