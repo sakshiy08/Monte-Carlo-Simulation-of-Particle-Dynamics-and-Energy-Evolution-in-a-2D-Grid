@@ -46,6 +46,6 @@ This part of the code uses the Metropolis Monte Carlo method to simulate the mov
 5. **Iteration:** 
     - The process is repeated for a defined number of steps, allowing particles to move multiple times and achieve a more realistic simulation of dynamic movement.
 
-- **KT Value:** The KT value (related to thermal energy) can be adjusted to influence the likelihood of particle movement.
+**KT Value:** The KT value (related to thermal energy) can be adjusted to influence the likelihood of particle movement.
 
 This method helps in studying the statistical behavior and equilibrium properties of the system by simulating the movement and interaction of particles under controlled conditions.
