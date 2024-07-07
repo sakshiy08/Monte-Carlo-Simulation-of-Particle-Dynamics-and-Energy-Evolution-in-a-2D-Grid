@@ -56,4 +56,15 @@ This method helps in studying the statistical behavior and equilibrium propertie
 + For particles on the last row or column, it ensures that interactions with adjacent particles are correctly handled. Periodic boundary conditions are considered to ensure continuity
 + The total energy of the system is calculated by summing the interaction energies of all particle pairs
 
+### Metropolis Criterion Application
+This section of the code applies the Metropolis criterion of the Monte Carlo algorithm to decide whether to accept or reject new particle configurations based on their energies
+
++ New Energy Accumulation: The new energy of the system (new_energy) is accumulated by summing the interaction energies of particles in the matrix
++ Energy Comparison: The new energy is compared with the old energy (old_energy). If the new energy is lower, the new state is accepted unconditionally
++ Probabilistic Acceptance: If the new energy is higher, a probabilistic acceptance criterion is applied:
+  - A random number r2 is generated
+  - The Boltzmann factor (exp(-(new_energy - old_energy) / KT)) is calculated
+  - If the Boltzmann factor is less than r2, the new state is accepted
+  - Otherwise, the system reverts to the previous state (A1) and energy
++ Output: The final energies (old_energy and new_energy) are printed for analysis.
 
