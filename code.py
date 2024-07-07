@@ -120,22 +120,26 @@ def metropolis_monte_carlo(matrix, KT, steps):
 
 ------------------------------------------------------------------------------------
 
-#Energy after the random movement of particles
+# Energy after the random movement of particles
 new_energy = 0
-sec_energy = np.zeros((30,30))
-for i in range(30):
-  for j in range(30):
-    if(i==29 and j!=29):
-      sec_energy[i][j] = energy(A[i][j],A[i][j+1])
-    elif(i!=29 and j==29):
-      sec_energy[i][j] = energy(A[i][j],A[i+1][j])
-    elif(i==29 and j==29):
-      continue
-    else:
-      sec_energy[i][j] += energy(A[i][j],A[i+1][j])
-      sec_energy[i][j] += energy(A[i][j],A[i][j+1])
-    #print((i,j+1),(i+1,j))
-#print(sec_energy)
+sec_energy = np.zeros((matrix_size, matrix_size))  # Matrix to store interaction energies after movement
+
+# Iterate over each element in the matrix
+for i in range(matrix_size):
+    for j in range(matrix_size):
+        if i == matrix_size - 1 and j != matrix_size - 1:  # If on the last row but not the last column
+            sec_energy[i][j] = energy(A[i][j], A[i][j + 1])
+        elif i != matrix_size - 1 and j == matrix_size - 1:  # If not on the last row but on the last column
+            sec_energy[i][j] = energy(A[i][j], A[i + 1][j])
+        elif i == matrix_size - 1 and j == matrix_size - 1:  # If on the last row and last column
+            continue
+        else:
+            sec_energy[i][j] += energy(A[i][j], A[i + 1][j])
+            sec_energy[i][j] += energy(A[i][j], A[i][j + 1])
+
+        new_energy += sec_energy[i][j]  # Sum the energies
+
+print(new_energy)  # Print the total energy after movement
 
 -------------------------------------------------------------------------------------
 
