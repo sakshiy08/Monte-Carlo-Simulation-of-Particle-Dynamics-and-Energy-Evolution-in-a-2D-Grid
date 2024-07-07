@@ -66,5 +66,5 @@ This section of the code applies the Metropolis criterion of the Monte Carlo alg
   - The Boltzmann factor (exp(-(new_energy - old_energy) / KT)) is calculated
   - If the Boltzmann factor is less than r2, the new state is accepted
   - Otherwise, the system reverts to the previous state (A1) and energy
-+ Output: The final energies (old_energy and new_energy) are printed for analysis.
++ Output: The final energies (old_energy and new_energy) are printed for analysis
 
