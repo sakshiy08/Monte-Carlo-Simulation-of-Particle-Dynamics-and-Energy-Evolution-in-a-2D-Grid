@@ -20,12 +20,12 @@ Iteration Limit: The iteration limit in the loop is adjusted to 1000 * matrix_si
 The `energy` function takes two parameters, `x` and `y`, which represent the charges of two interacting particles. The function returns the energy of interaction based on predefined rules. The energy function is a crucial component in the simulation, helping to calculate the interactions based on the charges of the particles
 
 ### Calculating Initial Energy
-+ initial_energy(A) function computes the total initial energy of the system <br>
-+ It initializes old_energy to zero and first_energy as a matrix of zeros to store interaction energies <br>
++ initial_energy(A) function computes the total initial energy of the system
++ It initializes old_energy to zero and first_energy as a matrix of zeros to store interaction energies
 + Iterates through each element of matrix A to calculate interaction energies:
   - Handles boundary conditions to ensure proper energy calculation at matrix edges
   - Accumulates total energy in old_energy 
-+ The computed old_energy is printed, representing the total initial energy of the particle system based on initial particle configurations.
++ The computed old_energy is printed, representing the total initial energy of the particle system based on initial particle configurations
 
 ### Particle Movement using random motion
 
@@ -49,3 +49,11 @@ This part of the code uses the Monte Carlo method to simulate the movement of pa
 **KT Value:** The KT value (related to thermal energy) can be adjusted to influence the likelihood of particle movement
 
 This method helps in studying the statistical behavior and equilibrium properties of the system by simulating the movement and interaction of particles under controlled conditions
+
+### Calculating Energy again after the particle movement
++ A new energy matrix (sec_energy) is created to store the interaction energies of particles after they have moved
++ The code iterates through each element in the matrix A, checking the interaction energies of adjacent particles 
++ For particles on the last row or column, it ensures that interactions with adjacent particles are correctly handled. Periodic boundary conditions are considered to ensure continuity
++ The total energy of the system is calculated by summing the interaction energies of all particle pairs
+
+
