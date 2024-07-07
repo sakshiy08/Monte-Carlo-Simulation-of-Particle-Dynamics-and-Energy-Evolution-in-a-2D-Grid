@@ -143,22 +143,26 @@ print(new_energy)  # Print the total energy after movement
 
 -------------------------------------------------------------------------------------
 
-#Metropolis criterion of the Monte Carlo algorithm
-for i in range(30):
-  for j in range(30):
-    new_energy = new_energy + sec_energy[i][j]
-    if new_energy < old_energy:
-        old_energy = new_energy
-    elif new_energy > old_energy:
-      r2=random.random()
-      if math.e**(-(new_energy-old_energy))/KT < r2:
-        old_energy = new_energy
-      else:
-        #Revert to the previous state and energy
-        new_energy = old_energy
-        A = A1
-        continue
-print(old_energy,new_energy)
+# Metropolis criterion of the Monte Carlo algorithm
+for i in range(matrix_size):
+    for j in range(matrix_size):
+        new_energy += sec_energy[i][j]  # Accumulate the new energy
+        if new_energy < old_energy:
+            # Accept the new state if the energy is lower
+            old_energy = new_energy
+        elif new_energy > old_energy:
+            # Calculate the probability of accepting a higher energy state
+            r2 = random.random()
+            if math.exp(-(new_energy - old_energy) / KT) < r2:
+                # Accept the new state with a certain probability
+                old_energy = new_energy
+            else:
+                # Revert to the previous state and energy
+                new_energy = old_energy
+                A = A1.copy()
+                continue
+
+print(old_energy, new_energy)  # Print the final energies
 
 --------------------------------------------------------------------------------------
 
