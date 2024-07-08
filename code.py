@@ -167,11 +167,83 @@ print(old_energy, new_energy)  # Print the final energies
 --------------------------------------------------------------------------------------
 
 # Association and Dissociation of particles after movement
-
+# Initialize matrix B for complex formation tracking and set association/dissociation rates
 B = np.zeros((matrix_size, matrix_size, 2))
 k_a = input("value of Association constant:")
 k_d = input("value of Dissociation constant:")
+num_iterations = input("give number of iterations:")
 R = k_a + k_d
+
+# Loop for a large number of iterations to simulate the system
+for _ in range(num_iterations ):
+    A1 = A.copy()  # Copy the current state of matrix A to revert if necessary
+    x = random.randint(0, matrix_size - 1)
+    y = random.randint(0, matrix_size - 1)
+    
+    # Check if the current cell contains a particle or complex (represented by 3)
+    if A[x][y] in [0, 1, -1, 3]:
+        x1, y1 = move_particle(A, x, y, matrix_size)  # Move the particle
+
+       
+        #complex formation
+        
+        r1 = random.random()
+        rr = r1 * R  # Random number to decide association or dissociation
+
+        # Association process
+        if A[x1][y1] != 2 and A[x][y] != 0 and A[x1][y1] != 0 and A[x][y] != 3 and rr <= k_a:
+            if A[x][y] == 1 and A[x1][y1] == 1:
+                B[x1][y1][0] += 2
+            if A[x][y] == -1 and A[x1][y1] == -1:
+                B[x1][y1][1] += 2
+            if (A[x][y] == 1 and A[x1][y1] == -1) or (A[x][y] == -1 and A[x1][y1] == 1):
+                B[x1][y1][0] += 1
+                B[x1][y1][1] += 1
+            if A[x][y] == 1 and A[x1][y1] == 3:
+                B[x1][y1][0] += 1
+            if A[x][y] == -1 and A[x1][y1] == 3:
+                B[x1][y1][1] += 1
+            A[x][y] = 2  # Empty the original cell
+            A[x1][y1] = 3  # Mark the new cell as a complex
+
+        # Dissociation process
+        elif A[x][y] == 3 and A[x1][y1] == 2 and rr > k_a:
+            if np.sum(B[x][y]) == 2:
+                if B[x][y][0] == 2:
+                    A[x][y] = 1
+                    A[x1][y1] = 1
+                    B[x][y][0] = 0
+                elif B[x][y][1] == 2:
+                    A[x][y] = -1
+                    A[x1][y1] = -1
+                    B[x][y][1] = 0
+                elif B[x][y][0] == 1 and B[x][y][1] == 1:
+                    A[x][y] = -1
+                    A[x1][y1] = 1
+                    B[x][y][0] = 0
+                    B[x][y][1] = 0
+            elif np.sum(B[x][y]) > 2:
+                r3 = random.random()
+                if r3 <= 0.5:
+                    if B[x][y][0] > 1:
+                        A[x1][y1] = 1
+                        B[x][y][0] -= 1
+                    elif B[x][y][1] > 1:
+                        A[x1][y1] = -1
+                        B[x][y][1] -= 1
+                else:
+                    if B[x][y][1] > 1:
+                        A[x1][y1] = -1
+                        B[x][y][1] -= 1
+                    elif B[x][y][0] > 1:
+                        A[x1][y1] = 1
+                        B[x][y][0] -= 1
+
+        # Movement of particles
+        elif A[x1][y1] == 2:
+            A[x1][y1] = A[x][y]  # Move the particle
+            A[x][y] = 2  # Empty the original cell
+
 
 
 
