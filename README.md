@@ -84,7 +84,16 @@ Random Movement:
 Based on a random number r, particles move to adjacent positions (left, right, up, or down) with periodic boundary conditions applied
 
 Complex Formation:
-Association:
-- If certain conditions are met (particles are not empty spaces or complexes), particles at adjacent positions may form a complex
-- The type of complex formed depends on the types of particles involved
-- The matrix A is updated to reflect the formation of a complex, and the matrix B is updated to keep track of the components of the complex
+  - Association:
+    - If certain conditions are met (particles are not empty spaces or complexes), particles at adjacent positions may form a complex
+    - The type of complex formed depends on the types of particles involved
+    - The matrix A is updated to reflect the formation of a complex, and the matrix B is updated to keep track of the components of the complex
+
+  - Dissociation:
+    - If a complex is present, it may dissociate based on the dissociation rate
+    - The matrix A and B are updated to reflect the dissociation, reverting to the original particles
+
+Particle Counting:
+- After the main simulation loop, the code counts the number of each type of particle (+1, -1, neutral, and complexes)
+- It also sums the components of all complexes
+
