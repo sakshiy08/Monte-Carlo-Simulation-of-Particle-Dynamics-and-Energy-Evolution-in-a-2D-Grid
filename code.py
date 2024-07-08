@@ -1,5 +1,5 @@
 import numpy as np
-import randomhhjhj jjoi jhk
+import random
 
 def create_matrix(matrix_size, num_neutral, num_negative, num_positive):
     # Initialize the matrix with all elements set to 2
