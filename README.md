@@ -79,3 +79,12 @@ Main Simulation Loop:
 - The simulation runs for your defined of iterations (num_iterations)
 - A copy of the current state of the matrix A is created (A1)
 - A random position (x, y) in the matrix is selected
+
+Random Movement:
+Based on a random number r, particles move to adjacent positions (left, right, up, or down) with periodic boundary conditions applied
+
+Complex Formation:
+Association:
+- If certain conditions are met (particles are not empty spaces or complexes), particles at adjacent positions may form a complex
+- The type of complex formed depends on the types of particles involved
+- The matrix A is updated to reflect the formation of a complex, and the matrix B is updated to keep track of the components of the complex
