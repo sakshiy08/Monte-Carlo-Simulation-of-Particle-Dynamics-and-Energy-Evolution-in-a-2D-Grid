@@ -1,4 +1,4 @@
-import numpy as np
+jhuhimport numpy as np
 import random
 
 def create_matrix(matrix_size, num_neutral, num_negative, num_positive):
