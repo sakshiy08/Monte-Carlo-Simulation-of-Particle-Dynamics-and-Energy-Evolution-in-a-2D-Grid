@@ -180,11 +180,31 @@ for _ in range(num_iterations ):
     x = random.randint(0, matrix_size - 1)
     y = random.randint(0, matrix_size - 1)
     
-    # Check if the current cell contains a particle or complex (represented by 3)
-    if A[x][y] in [0, 1, -1, 3]:
-        x1, y1 = move_particle(A, x, y, matrix_size)  # Move the particle
+    # Check if the selected position contains a particle (neutral, +1, -1, or complex(3))
+    if A[x][y]==0 or A[x][y]==1 or A[x][y]==-1 and A[x][y]==3:
+    r=random.random()
+    if(r<=0.25):
+      x1=x-1
+      y1=y
+      if(x1<0):
+        x1=x1 + matrix size
+    elif(r>0.25 and r<=0.5):
+      x1=x+1
+      y1=y
+      if(x1>29):
+        x1=x1 - matrix size
+    elif(r>0.5 and r<=0.75):
+      x1=x
+      y1=y-1
+      if(y1<0):
+        y1=y1 + matrix size
+    elif(r>0.75):
+      x1=x
+      y1=y+1
+      if(y1>29):
+        y1=y1 - matrix size
 
-       
+          
         #complex formation
         
         r1 = random.random()
@@ -243,7 +263,32 @@ for _ in range(num_iterations ):
         elif A[x1][y1] == 2:
             A[x1][y1] = A[x][y]  # Move the particle
             A[x][y] = 2  # Empty the original cell
+            x=x1
+            y=y1
 
+# Initialize counters for different particle types and complexes
+count1 = 0  # Count of +1 charged particles
+count0 = 0  # Count of neutral particles
+countn1 = 0  # Count of -1 charged particles
+count3 = 0  # Count of complexes
+total_complex_strength = 0  # Total strength of complexes
 
+# Loop through the entire matrix to count particles and complexes
+for i in range(matrix_size):
+    for j in range(matrix_size):
+        if A[i][j] == 1:
+            count1 += 1  # Increment count of +1 particles
+        elif A[i][j] == -1:
+            countn1 += 1  # Increment count of -1 particles
+        elif A[i][j] == 0:
+            count0 += 1  # Increment count of neutral particles
+        elif A[i][j] == 3:
+            count3 += 1  # Increment count of complexes
+            total_complex_strength += np.sum(B[i][j])  # Sum the strengths of complexes
 
-
+# Output the results
+print(f"Count of +1 particles: {count1}")
+print(f"Count of -1 particles: {countn1}")
+print(f"Count of neutral particles: {count0}")
+print(f"Count of complexes: {count3}")
+print(f"Total complex strength: {total_complex_strength}")
