@@ -1,5 +1,5 @@
 ,mkjk   kkn jhuhimport numpy as np
-import random
+import randomhhjhj jjoi jhk
 
 def create_matrix(matrix_size, num_neutral, num_negative, num_positive):
     # Initialize the matrix with all elements set to 2
