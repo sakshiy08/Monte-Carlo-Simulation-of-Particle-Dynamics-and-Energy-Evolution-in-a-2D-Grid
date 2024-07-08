@@ -16,7 +16,6 @@ Particle Placement: Particles are placed in the matrix according to the specifie
 Iteration Limit: The iteration limit in the loop is adjusted to 1000 * matrix_size to accommodate larger matrices <br>
 
 ### Energy Function
-
 The `energy` function takes two parameters, `x` and `y`, which represent the charges of two interacting particles. The function returns the energy of interaction based on predefined rules. The energy function is a crucial component in the simulation, helping to calculate the interactions based on the charges of the particles
 
 ### Calculating Initial Energy
@@ -68,3 +67,15 @@ This section of the code applies the Metropolis criterion of the Monte Carlo alg
   - Otherwise, the system reverts to the previous state (A1) and energy
 + Output: The final energies (old_energy and new_energy) are printed for analysis
 
+### Association and Dissociation of Particles
+This part of the code simulates the association and dissociation of particles within a 2D matrix. Particles can move randomly, form complexes, or dissociate based on defined probabilities. The simulation helps study the dynamics and equilibrium properties of the system
+
+Initialization:
+- A 3D matrix B is initialized to keep track of particle complexes
+- Constants k_a (association rate) and k_d (dissociation rate) is to be provided
+- R is the sum of k_a and k_d
+
+Main Simulation Loop:
+- The simulation runs for your defined of iterations (num_iterations)
+- A copy of the current state of the matrix A is created (A1)
+- A random position (x, y) in the matrix is selected
