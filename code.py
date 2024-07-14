@@ -292,4 +292,3 @@ print(f"Count of -1 particles: {countn1}")
 print(f"Count of neutral particles: {count0}")
 print(f"Count of complexes: {count3}")
 print(f"Total complex strength: {total_complex_strength}")
- dfdsg
